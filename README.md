@@ -51,3 +51,4 @@ Unsplash APIのリクエスト制限は50回/1時間 なので、想定してい
 DBに保存された画像URLからIDを抽出し、検索結果の中からfind_indexメソッドを使って該当画像が何番目に表示されるかを特定する。
 Unsplash APIは1ページ30件ずつ、最大5000件まで参照可能。どこまで追跡するかは、API制限も考慮し、実装しながら考えていく。
 
+Figma: https://www.figma.com/design/MjKIqnr2Ew5b7Wxq3Ij4gh/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=FgV82hne3m5tOgkA-1
