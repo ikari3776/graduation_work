@@ -53,4 +53,4 @@ Unsplash APIは1ページ30件ずつ、最大5000件まで参照可能。どこ�
 
 Figma: https://www.figma.com/design/MjKIqnr2Ew5b7Wxq3Ij4gh/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=FgV82hne3m5tOgkA-1
 
-ER図: https://gyazo.com/8b8f4367cdabd4c58aa73656aba37105
+ER図: https://gyazo.com/a68e8cc443444c01ff797ed9a0eb7f74
