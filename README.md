@@ -52,3 +52,5 @@ DBに保存された画像URLからIDを抽出し、検索結果の中からfind
 Unsplash APIは1ページ30件ずつ、最大5000件まで参照可能。どこまで追跡するかは、API制限も考慮し、実装しながら考えていく。
 
 Figma: https://www.figma.com/design/MjKIqnr2Ew5b7Wxq3Ij4gh/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=FgV82hne3m5tOgkA-1
+
+ER図: https://gyazo.com/b8b6ac4c092f3f4922cb6d08ca33e4c4
