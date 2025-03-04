@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "FIRST HIT" %></title>
+    <title><%= page_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -9,12 +9,45 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <p class="navbar-brand text-white mx-auto m-0">FIRST HIT</p>
+      <div class="d-flex align-items-center">
+        <div class="dropdown">
+          <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            メニュー
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/">ホーム</a></li>   
+            <li><a class="dropdown-item" href="#">プレイ</a></li>
+            <li><a class="dropdown-item" href="#">ランキング</a></li>
+            <li><a class="dropdown-item" href="#">遊び方</a></li>   
+            <% if logged_in? %>
+              <li><a class="dropdown-item" href="/logout">ログアウト</a></li>
+            <% else %>
+              <li><a class="dropdown-item" href="/users/new">ユーザー登録</a></li>
+              <li><a class="dropdown-item" href="/login">ログイン</a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mx-auto text-center">
+        <p class="navbar-brand text-white m-0">検索王</p>
+      </div>
+
+      <div class="position-absolute bottom-0 end-0 p-2">
+        <% if logged_in? %>
+          <p class="text-white small mb-0">ログイン中: <%= current_user.name %>さん</p>
+        <% else %>
+          <p class="text-white small mb-0">ログインしていません</p>
+        <% end %>
+      </div>
     </nav>
+
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
 
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </body>
 </html>

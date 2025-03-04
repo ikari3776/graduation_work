@@ -1,3 +1,4 @@
+<% content_for(:title, 'ユーザー登録') %>
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
@@ -19,11 +20,11 @@
         </div>
         <div class="mb-3">
           <%= f.label :password, class: "form-label" %>
-          <%= f.password_field :password, placeholder: '3文字以上で入力してください', class: "form-control" %>
+          <%= f.password_field :password, class: "form-control" %>
         </div>
         <div class="mb-3">
           <%= f.label :password_confirmation, class: "form-label" %>
-          <%= f.password_field :password_confirmation, placeholder: '3文字以上で入力してください', class: "form-control" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
         <%= f.submit "登録", class: "btn btn-primary" %>
       <% end %>
