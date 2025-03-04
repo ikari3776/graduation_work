@@ -19,15 +19,16 @@
             <li><a class="dropdown-item" href="#">プレイ</a></li>
             <li><a class="dropdown-item" href="#">ランキング</a></li>
             <li><a class="dropdown-item" href="#">遊び方</a></li>   
-            <% if logged_in? %>
-              <li><a class="dropdown-item" href="/logout">ログアウト</a></li>
-            <% else %>
-              <li><a class="dropdown-item" href="/users/new">ユーザー登録</a></li>
-              <li><a class="dropdown-item" href="/login">ログイン</a></li>
-            <% end %>
           </ul>
         </div>
       </div>
+
+      <% if logged_in? %>
+        <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-danger btn-sm" %>      
+      <% else %>
+        <%= link_to "ユーザー登録", new_user_path, class: "btn btn-success btn-sm" %>      
+        <%= link_to "ログイン", login_path, class: "btn btn-success btn-sm" %>      
+      <% end %>
 
       <div class="mx-auto text-center">
         <p class="navbar-brand text-white m-0">検索王</p>
