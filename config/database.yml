@@ -15,3 +15,8 @@ development:
 test:
   <<: *default
   database: myapp_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  database: d4pfpn49hl1id9
