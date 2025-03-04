@@ -11,9 +11,9 @@ class UserSessionsController < ApplicationController
     elsif login(params[:name], params[:password])
       flash[:success] = "ログインしました"
       redirect_to root_path
-      return  
+      nil
     else
-      flash.now[:danger] = 'パスワードが間違っています'
+      flash.now[:danger] = "パスワードが間違っています"
       render :new
     end
   end
