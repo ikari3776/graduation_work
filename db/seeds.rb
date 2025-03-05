@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 
 API_KEY = ENV['PIXABAY_API_KEY']
-QUERY = "food"
+QUERY = "animal"
 PER_PAGE = 200 # Pixabay の max は 200 件
 TOTAL_IMAGES = 1000 # 目標は 1000 枚
 
