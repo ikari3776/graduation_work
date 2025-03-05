@@ -1,0 +1,6 @@
+<% content_for(:title, 'プレイ') %>
+
+<div class="d-flex justify-content-center">
+  <% @image = Image.order("RANDOM()").first %>
+  <%= image_tag @image.url, alt: "ランダム画像", class: "img-fluid w-50" %>
+</div>
