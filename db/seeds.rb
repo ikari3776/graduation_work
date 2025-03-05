@@ -11,9 +11,7 @@ def fetch_pixabay_images
 
   while images.length < TOTAL_IMAGES
     query = QUERY.sample # ランダムなキーワードを選ぶ
-    page = rand(1..5)       # 1〜5ページ目のどれかをランダムに選ぶ
-    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{query}&image_type=photo&per_page=#{PER_PAGE}&page=#{page}"
-
+    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{query}&image_type=photo&per_page=#{PER_PAGE}&page=1"
     response = HTTParty.get(url)
     data = JSON.parse(response.body)
 
