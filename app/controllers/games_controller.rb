@@ -1,3 +1,5 @@
 class GamesController < ApplicationController
-  def index; end
+  def index
+    @image_url = Image.order("RANDOM()").first.url
+  end
 end
