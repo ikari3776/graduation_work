@@ -12,7 +12,7 @@ def fetch_pixabay_images(query)
   page = 1
 
   while images.length < TOTAL_IMAGES_PER_CATEGORY
-    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{QUERY}&image_type=photo&per_page=#{PER_PAGE}&page=#{page}"
+    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{query}&image_type=photo&per_page=#{PER_PAGE}&page=#{page}"
 
     response = HTTParty.get(url)
     
