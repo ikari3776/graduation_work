@@ -2,22 +2,24 @@ require 'httparty'
 require 'json'
 
 API_KEY = ENV['PIXABAY_API_KEY']
-QUERY = "animal"
+QUERY = ["food", "animal", "sports", "people", "hobby", "vehicles", "clothing", "emotions", "objects", "landmarks"]
 PER_PAGE = 200 # Pixabay の max は 200 件
-TOTAL_IMAGES = 1000 # 目標は 1000 枚
+TOTAL_IMAGES_PER_CATEGORY = 1000 # 目標は 10000 枚
+SLEEP_TIME = 0.5
 
 def fetch_pixabay_images
   images = []
   page = 1
 
-  while images.length < TOTAL_IMAGES
+  while images.length < TOTAL_IMAGES_PER_CATEGORY
     url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{QUERY}&image_type=photo&per_page=#{PER_PAGE}&page=#{page}"
 
     response = HTTParty.get(url)
     
     if response.code != 200
-      puts "APIエラー: #{response.code}"
-      break
+      puts "APIエラー: #{response.code} (#{query})"
+      sleep(5) # エラー時は5秒待ってリトライ
+      next
     end
 
     data = JSON.parse(response.body)
@@ -29,19 +31,28 @@ def fetch_pixabay_images
     end
 
     page += 1
-    break if data["hits"].empty? || images.length >= TOTAL_IMAGES
+    break if data["hits"].empty? || images.length >= TOTAL_IMAGES_PER_CATEGORY
+
+    sleep(SLEEP_TIME) # API 制限回避
   end
 
-  images.first(TOTAL_IMAGES) # 1000 件に制限
+  images.first(TOTAL_IMAGES_PER_CATEGORY) # 1000 件に制限
 end
 
-# 画像 URL を取得して DB に保存
-puts "画像を保存しています"
-image_urls = fetch_pixabay_images
 
-if image_urls.any?
-  Image.insert_all(image_urls.map { |url| { url: url, created_at: Time.current, updated_at: Time.current } })
-  puts "#{image_urls.length}枚の画像がDBに保存されました"
-else
-  puts "画像が取得できませんでした"
+# 各カテゴリごとに取得 & 保存
+QUERIES.each do |query|
+  puts "カテゴリ '#{query}' の画像を取得中..."
+  image_urls = fetch_pixabay_images(query)
+
+  if image_urls.any?
+    Image.insert_all(image_urls.map { |url| { url: url, category: query, created_at: Time.current, updated_at: Time.current } })
+    puts "#{image_urls.length} 枚の画像が '#{query}' カテゴリとして DB に保存されました"
+  else
+    puts "カテゴリ '#{query}' の画像が取得できませんでした"
+  end
+
+  sleep(2) # 各カテゴリごとに少し待機（API 制限対策）
 end
+
+puts "✅ すべての画像の取得が完了しました！"
