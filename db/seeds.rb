@@ -7,7 +7,7 @@ PER_PAGE = 200 # Pixabay の max は 200 件
 TOTAL_IMAGES_PER_CATEGORY = 1000 # 目標は 10000 枚
 SLEEP_TIME = 0.5
 
-def fetch_pixabay_images
+def fetch_pixabay_images(query)
   images = []
   page = 1
 
