@@ -4,7 +4,7 @@ require 'json'
 API_KEY = ENV['PIXABAY_API_KEY']
 QUERIES = ["food", "animal", "sports", "people", "hobby", "vehicles", "clothing", "emotions", "objects", "landmarks"]
 PER_PAGE = 200 # Pixabay の max は 200 件
-TOTAL_IMAGES_PER_CATEGORY = 1000 # 目標は 10000 枚
+TOTAL_IMAGES_PER_CATEGORY = 600 # 目標は 10000 枚
 SLEEP_TIME = 0.5
 
 def fetch_pixabay_images(query)
