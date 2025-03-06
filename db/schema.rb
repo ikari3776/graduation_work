@@ -10,15 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_06_034232) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_06_232144) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "total_score"
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_games_on_user_id"
+  end
 
   create_table "images", force: :cascade do |t|
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+    t.integer "image_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "game_id"
+    t.string "image_url"
+    t.string "search_word"
+    t.integer "rank"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "search_results"
+    t.integer "image_id"
+    t.index ["game_id"], name: "index_questions_on_game_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,4 +52,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_034232) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_users_on_name", unique: true
   end
+
+  add_foreign_key "games", "users"
+  add_foreign_key "questions", "games"
 end

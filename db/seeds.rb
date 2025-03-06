@@ -25,7 +25,14 @@ def fetch_pixabay_images(query)
     data = JSON.parse(response.body)
 
     if data["hits"].any?
-      new_images = data["hits"].map { |hit| hit["webformatURL"] }
+      new_images = data["hits"].map do |hit|
+         {
+           image_id: hit["id"],
+           url: hit["webformatURL"],
+           category: query
+         }
+      end
+
       images += new_images
       images = images.uniq # 重複削除
     end
@@ -46,7 +53,14 @@ QUERIES.each do |query|
   image_urls = fetch_pixabay_images(query)
 
   if image_urls.any?
-    Image.insert_all(image_urls.map { |url| { url: url, category: query, created_at: Time.current, updated_at: Time.current } })
+    Image.insert_all(image_urls.map do |img|
+      {
+        image_id: img[:image_id], 
+        url: img[:url],
+        category: img[:category]
+      }
+    end)
+
     puts "#{image_urls.length} 枚の画像が '#{query}' カテゴリとして DB に保存されました"
   else
     puts "カテゴリ '#{query}' の画像が取得できませんでした"
