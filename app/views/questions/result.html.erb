@@ -1,0 +1,33 @@
+<h1>検索結果</h1>
+
+<div class="d-flex justify-content-center">
+  <%= image_tag @preview_question.image_url, alt: "ゲーム画像", class: "image-fluid w-50" %>
+</div>
+
+<p>検索ワード: <%= @preview_question.search_word %></p>
+<% if @preview_question.rank == 100 %>
+  <p>検索結果での順位: 100位以下</p>
+  <p>ポイント獲得なし</p> 
+<% else %>
+  <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
+  <p><%= @preview_question.score %>点獲得</p>
+<% end %>
+
+<% if @next_question %>
+  <%= link_to '次の問題へ', game_question_path(@game, @next_question), class: "btn btn-primary" %>
+<% else %>
+  <%= link_to '結果を見る', result_games_path(@game), class: "btn btn-success" %>
+<% end %>
+
+<h2>上位10位の画像</h2>
+<div class="container">
+  <div class="row">
+    <% @top_images.each do |image_url| %>
+      <div class="col-md-3 col-sm-4 col-6 mb-3">
+        <div class="top-image text-center">
+          <%= image_tag image_url, alt: "検索結果画像", class: "img-fluid" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
