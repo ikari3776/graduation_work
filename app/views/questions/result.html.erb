@@ -1,16 +1,20 @@
-<h1>検索結果</h1>
+<h2>検索結果</h2>
 
 <div class="d-flex justify-content-center">
   <%= image_tag @preview_question.image_url, alt: "ゲーム画像", class: "image-fluid w-50" %>
 </div>
 
 <p>検索ワード: <%= @preview_question.search_word %></p>
-<% if @preview_question.rank == 100 %>
-  <p>検索結果での順位: 100位以下</p>
+<% if @preview_question.rank == 200 %>
+  <p>検索結果での順位: 200位以下</p>
   <p>ポイント獲得なし</p> 
+<% elsif @preview_question.rank == 1 %>
+  <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
+  <p class='text-red'><strong>FIRST HIT!!!</strong></p>
+  <p><%= @preview_question.score %>ポイント獲得!</p>
 <% else %>
   <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
-  <p><%= @preview_question.score %>点獲得</p>
+  <p><%= @preview_question.score %>ポイント獲得!</p>
 <% end %>
 
 <% if @next_question %>
@@ -19,7 +23,7 @@
   <%= link_to '結果を見る', result_games_path(@game), class: "btn btn-success" %>
 <% end %>
 
-<h2>上位10位の画像</h2>
+<h3>上位10位の画像</h3>
 <div class="container">
   <div class="row">
     <% @top_images.each do |image_url| %>
