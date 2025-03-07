@@ -3,8 +3,7 @@ class GamesController < ApplicationController
     @game = Game.new(user: current_user, total_score: 0)
 
     if @game.save
-      category = ["food", "animal", "sports", "people", "hobby", "vehicles", "clothing", "emotions", "objects", "landmarks"].sample
-      images = Image.where(category: category).order("RANDOM()").limit(5)
+      images = Image.order("RANDOM()").limit(5)
 
       images.each do |image|
         @game.questions.create(image_url: image.url, image_id: image.image_id, rank: nil, score: nil)

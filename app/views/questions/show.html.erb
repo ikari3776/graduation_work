@@ -1,10 +1,16 @@
-<h1>第<%= @question.id %>問</h1>
+<h2><%= @question_number.to_i + 1 %>/5問目</h2>
 <div class="d-flex justify-content-center">
   <%= image_tag @question.image_url, alt: "ゲーム画像", class: "image-fluid w-50" %>
 </div>
 
-<%= form_tag answer_game_questions_path(@question.game), method: :post do %>
-  <%= hidden_field_tag :question_id, @question.id %>
-  <%= text_field_tag :search, nil, placeholder: "この画像を説明するワードを入力" %>
-  <%= submit_tag "検索" %>
-<% end %>
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <%= form_tag answer_game_questions_path(@question.game), method: :post do %>
+    <%= hidden_field_tag :question_id, @question.id %>
+
+    <div class="input-group mt-2">
+      <%= text_field_tag :search, nil, placeholder: "検索ワード", class: "form-control text-left" %>
+      <%= submit_tag "検索" %>
+    </div>
+
+  <% end %>
+</div>
