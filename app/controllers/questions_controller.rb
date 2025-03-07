@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   API_KEY = ENV['PIXABAY_API_KEY']
 
   def show
+    @question_number = params[:id]
     @question = Question.find(params[:id])
   end
 
@@ -12,7 +13,7 @@ class QuestionsController < ApplicationController
     search_word = params[:search]
     image_id = question.image_id
 
-    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{CGI.escape(search_word)}&image_type=photo&per_page=100"
+    url = "https://pixabay.com/api/?key=#{API_KEY}&q=#{CGI.escape(search_word)}&image_type=photo&per_page=200"
 
     response = HTTParty.get(url)
     data = JSON.parse(response.body)
@@ -23,7 +24,7 @@ class QuestionsController < ApplicationController
       puts "#{index + 1}位: ID = #{hit['id']}, URL = #{hit['webformatURL']}"
     end
 
-    rank = 100
+    rank = 200
     data["hits"].each_with_index do |hit, index|
       if hit["id"] == image_id
         rank = index + 1
@@ -32,9 +33,9 @@ class QuestionsController < ApplicationController
     end
 
     points = if rank == 1
-               200
-             elsif rank <= 99
-               100 - rank
+               500
+             elsif rank <= 199
+               200 - rank
              else
                0
              end
