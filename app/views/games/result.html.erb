@@ -1,5 +1,7 @@
-<h1>ゲーム結果</h1>
-<p>最終スコア: <strong><%= @game.total_score %> 点</strong></p>
+<h1 class="text-center my-4">ゲーム結果</h1>
+<p class="text-center">最終スコア: <strong><%= @game.total_score %> 点</strong></p>
 
-<%= link_to 'もう一度プレイする', new_game_path, class: "btn btn-primary" %>
-<%= link_to 'ホームに戻る', root_path, class: "btn btn-primary" %>
+<div class="d-flex justify-content-center mt-4">
+  <%= link_to 'もう一度プレイする', new_game_path, class: "btn btn-success me-3" %>
+  <%= link_to 'ホームに戻る', root_path, class: "btn btn-secondary" %>
+</div>
