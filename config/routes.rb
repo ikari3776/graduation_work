@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
   resources :rules, only: %i[index]
+  resources :ranks, only: %i[index]
   resources :games, only: [ :new ] do
     collection do
       get "result/:game_id", to: "games#result", as: "result"

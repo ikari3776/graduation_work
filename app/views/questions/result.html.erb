@@ -1,37 +1,49 @@
-<h2>検索結果</h2>
+<div class="container mt-3">
+  <h2 class="text-center mb-3">
+    検索結果 <i class="bi bi-search"></i> 
+  </h2>
 
-<div class="d-flex justify-content-center">
-  <%= image_tag @preview_question.image_url, alt: "ゲーム画像", class: "image-fluid w-50" %>
-</div>
+  <div class="d-flex justify-content-center">
+    <%= image_tag @preview_question.image_url, alt: "ゲーム画像", class: "img-fluid", style: "max-height: 30vh; object-fit: contain;" %>
+  </div>
 
-<p>検索ワード: <%= @preview_question.search_word %></p>
-<% if @preview_question.rank == 200 %>
-  <p>検索結果での順位: 200位以下</p>
-  <p>ポイント獲得なし</p> 
-<% elsif @preview_question.rank == 1 %>
-  <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
-  <h2 class='text-danger'><strong>FIRST HIT!!!</strong></h2>
-  <p><%= @preview_question.score %>ポイント獲得!</p>
-<% else %>
-  <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
-  <p><%= @preview_question.score %>ポイント獲得!</p>
-<% end %>
 
-<% if @next_question %>
-  <%= link_to '次の問題へ', game_question_path(@game, @next_question.number), class: "btn btn-primary" %>
-<% else %>
-  <%= link_to '結果を見る', result_games_path(@game), class: "btn btn-success" %>
-<% end %>
+  <div class="card p-4 shadow-sm">
+    <p class="fs-5"><strong>検索ワード:</strong> <span class="badge bg-secondary"><%= @preview_question.search_word %></span></p>
 
-<h3>上位10位の画像</h3>
-<div class="container">
-  <div class="row">
-    <% @top_images.each do |image_url| %>
-      <div class="col-md-3 col-sm-4 col-6 mb-3">
-        <div class="top-image text-center">
-          <%= image_tag image_url, alt: "検索結果画像", class: "img-fluid" %>
-        </div>
-      </div>
+    <% if @preview_question.rank == 200 %>
+      <p class="fs-5 text-muted">検索結果での順位: 200位以下</p>
+      <p class="text-muted">ポイント獲得なし</p>
+    <% elsif @preview_question.rank == 1 %>
+      <p class="fs-4 text-danger fw-bold">検索結果での順位: <%= @preview_question.rank %> 位</p>
+      <h2 class="text-danger text-center"><strong>FIRST HIT!!!</strong></h2>
+      <p class="fs-4 text-success fw-bold"><%= @preview_question.score %>ポイント獲得!</p>
+    <% else %>
+      <p class="fs-5">検索結果での順位: <span class="fw-bold"><%= @preview_question.rank %> 位</span></p>
+      <p class="fs-4 text-success fw-bold"><%= @preview_question.score %>ポイント獲得!</p>
     <% end %>
   </div>
+
+  <div class="text-center my-4">
+    <% if @next_question %>
+      <%= link_to '次の問題へ', game_question_path(@game, @next_question.number), class: "btn btn-primary btn-lg px-4 me-2" %>
+    <% else %>
+      <%= link_to '結果を見る', result_games_path(@game), class: "btn btn-success btn-lg px-4" %>
+    <% end %>
+  </div>
+
+  <% if @top_images.any? %>
+    <h3 class="text-center mb-3">上位10位の画像</h3>
+    <div class="row">
+      <% @top_images.each do |image| %>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card">
+            <img src="<%= image %>" class="card-img-top" alt="画像">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>  
+    <h3 class="text-center mb-3">検索結果なし</h3>
+  <% end %>
 </div>
