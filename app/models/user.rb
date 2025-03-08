@@ -9,5 +9,5 @@ class User < ApplicationRecord
                        length: { minimum: 3 }
   validates :password_confirmation, length: { minimum: 3 }
 
-  has_many :games
+  has_many :games, dependent: :destroy
 end
