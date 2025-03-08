@@ -10,7 +10,7 @@
   <p>ポイント獲得なし</p> 
 <% elsif @preview_question.rank == 1 %>
   <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
-  <p class='text-red'><strong>FIRST HIT!!!</strong></p>
+  <h2 class='text-danger'><strong>FIRST HIT!!!</strong></h2>
   <p><%= @preview_question.score %>ポイント獲得!</p>
 <% else %>
   <p>検索結果での順位: <%= @preview_question.rank %> 位</p>
@@ -18,7 +18,7 @@
 <% end %>
 
 <% if @next_question %>
-  <%= link_to '次の問題へ', game_question_path(@game, @next_question), class: "btn btn-primary" %>
+  <%= link_to '次の問題へ', game_question_path(@game, @next_question.number), class: "btn btn-primary" %>
 <% else %>
   <%= link_to '結果を見る', result_games_path(@game), class: "btn btn-success" %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_06_232144) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_07_124430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_232144) do
     t.datetime "updated_at", null: false
     t.text "search_results"
     t.integer "image_id"
+    t.integer "number"
     t.index ["game_id"], name: "index_questions_on_game_id"
   end
 
