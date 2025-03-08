@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">
+    <i class="bi bi-trophy-fill text-warning"></i></i> ランキング <i class="bi bi-trophy-fill text-warning"></i>
+  </h1>
+
+  <% if logged_in? %>
+    <div class="alert alert-info text-center">
+      <% if @user_rank %>
+        <h4><%= current_user.name %> さんの成績</h4>
+        <p class="mb-0">
+          <span class="badge bg-primary fs-5"><%= @user_rank + 1 %> 位</span>
+          <span class="fs-5"><%= @user_score %> 点</span>
+        </p>
+      <% else %>
+        <p>まだゲームをプレイしていません</p>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-warning text-center">
+      <p>ログインするとランキングに参加できます</p>
+    </div>
+  <% end %>
+
+  <table class="table table-bordered text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>順位</th>
+        <th>ユーザー名</th>
+        <th>スコア</th>
+        <th>プレイ日時</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ranks.each_with_index do |rank, index| %>
+        <tr>
+          <td class="fw-bold"><%= index + 1 %> 位</td>
+          <td><%= rank.name %> さん</td>
+          <td class="fw-bold text-primary"><%= rank.max_total_score %> 点</td>
+          <td><%= rank.latest_finished_at.in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M:%S') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
