@@ -1,11 +1,15 @@
-<div class="container mt-3">
-  <h2 class="text-center mb-3">
+<% content_for(:title, '検索結果') %>
+<div class="container mt-2">
+  <h2 class="text-center mb-2">
     検索結果 <i class="bi bi-search"></i> 
   </h2>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mb-2">
     <%= image_tag @preview_question.image_url, alt: "ゲーム画像", class: "img-fluid", style: "max-height: 30vh; object-fit: contain;" %>
   </div>
+  <p class="text-center text-muted mt-1">
+    画像提供：<a href="https://pixabay.com/" target="_blank" rel="noopener noreferrer">Pixabay</a>
+  </p>
 
 
   <div class="card p-4 shadow-sm">
@@ -24,7 +28,7 @@
     <% end %>
   </div>
 
-  <div class="text-center my-4">
+  <div class="text-center my-2">
     <% if @next_question %>
       <%= link_to '次の問題へ', game_question_path(@game, @next_question.number), class: "btn btn-primary btn-lg px-4 me-2" %>
     <% else %>
@@ -47,3 +51,4 @@
     <h3 class="text-center mb-3">検索結果なし</h3>
   <% end %>
 </div>
+
