@@ -1,0 +1,2 @@
+class UserGameProgress < ApplicationRecord
+end
