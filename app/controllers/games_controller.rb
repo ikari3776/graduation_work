@@ -15,6 +15,11 @@ class GamesController < ApplicationController
       response = HTTParty.get(url)
       data = JSON.parse(response.body)
 
+      rate_limit = response.headers["x-ratelimit-limit"].to_i
+      remaining_requests = response.headers["x-ratelimit-remaining"].to_i
+
+      RateLimitInfo.create(limit: rate_limit, remaining: remaining_requests)
+
       if data["hits"].any?
         images = data["hits"].sample(5).map do |hit|
           {
