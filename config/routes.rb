@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
+  get "admin/infos", to: "infos#index"
   resources :rules, only: %i[index]
   resources :ranks, only: %i[index]
   resources :games, only: [ :new ] do

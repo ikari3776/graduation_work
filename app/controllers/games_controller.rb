@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   API_KEY = ENV["PIXABAY_API_KEY"]
   QUERY = [ "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015" ]
   PER_PAGE = 200
-  PAGE = [ 1, 2, 3, 4, 5 ].sample
+  PAGE = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ].sample
 
   def new
     @game = Game.new(user: current_user, total_score: 0)

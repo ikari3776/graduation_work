@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_08_130211) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_09_123102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_08_130211) do
     t.index ["game_id"], name: "index_questions_on_game_id"
   end
 
+  create_table "rate_limit_infos", force: :cascade do |t|
+    t.integer "limit"
+    t.integer "remaining"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_game_progresses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.text "answered_questions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_user_game_progresses_on_game_id"
+    t.index ["user_id"], name: "index_user_game_progresses_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "crypted_password", null: false
@@ -57,4 +74,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_08_130211) do
 
   add_foreign_key "games", "users"
   add_foreign_key "questions", "games"
+  add_foreign_key "user_game_progresses", "games"
+  add_foreign_key "user_game_progresses", "users"
 end
