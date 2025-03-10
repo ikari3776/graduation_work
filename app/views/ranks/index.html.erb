@@ -37,7 +37,7 @@
           <td class="fw-bold"><%= index + 1 %> 位</td>
           <td><%= rank.name %> さん</td>
           <td class="fw-bold text-primary"><%= rank.max_total_score %> 点</td>
-          <td><%= (rank.latest_finished_at || Time.current).in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= (rank.latest_finished_at || Time.parse('2099-01-01 00:00:00')).in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M:%S') %></td>
         </tr>
       <% end %>
     </tbody>
