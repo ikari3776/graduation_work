@@ -4,7 +4,7 @@ class PasswordResetsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
     @user&.deliver_reset_password_instructions!
-    redirect_to root_path, success: "メールを送信しました"
+    redirect_to root_path, success: "メールを送信しました。メールが届かない場合は、入力したメールアドレスが正しいかご確認ください。"
   end
 
   def edit

@@ -48,13 +48,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.postmarkapp.com",
     port: 587,
-    domain: "gmail.com",
+    domain: "firsthit.com",
     authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["EMAIL_USER"], # 環境変数から取得
-    password: ENV["EMAIL_PASS"]  # アプリパスワードを使用
+    user_name: ENV["POSTMARK_API_TOKEN"],
+    password: ENV["POSTMARK_API_TOKEN"],
+    enable_starttls_auto: true
   }
 
   # Print deprecation notices to the Rails logger.
