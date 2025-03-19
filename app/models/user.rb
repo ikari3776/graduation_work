@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  authenticates_with_sorcery!
   authenticates_with_sorcery! do |config|
     config.reset_password_mailer = UserMailer
   end
@@ -14,4 +15,5 @@ class User < ApplicationRecord
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
   has_many :games, dependent: :destroy
+  has_many :authentications, dependent: :destroy
 end
