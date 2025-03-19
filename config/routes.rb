@@ -20,4 +20,9 @@ Rails.application.routes.draw do
       end
     end
   end
+  post "oauth/callback" => "oauths#callback"
+  get "oauth/callback" => "oauths#callback" 
+  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+  get '/name/new', to: 'users#new_name', as: 'new_name'
+  patch '/name', to: 'users#create_name', as: 'create_name'
 end
