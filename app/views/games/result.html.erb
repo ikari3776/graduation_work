@@ -1,8 +1,4 @@
-<% content_for(:title, 'ゲーム結果') %>
-<h1 class="text-center my-4">ゲーム結果</h1>
-<p class="text-center">最終スコア: <strong><%= @game.total_score %> 点</strong></p>
+<h2>ゲーム終了！お疲れさまでした！</h2>
+<p>合計得点: <strong><%= @total_score %>点</strong> です！</p>
 
-<div class="d-flex justify-content-center mt-4">
-  <%= link_to 'もう一度プレイする', new_game_path, class: "btn btn-success me-3" %>
-  <%= link_to 'ホームに戻る', root_path, class: "btn btn-secondary" %>
-</div>
+<%= link_to "🔄 もう一度プレイする", games_path %>
