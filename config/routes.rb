@@ -8,18 +8,13 @@ Rails.application.routes.draw do
   resources :rules, only: %i[index]
   resources :ranks, only: %i[index]
   resources :password_resets, only: %i[new create edit update]
-  resources :games, only: %i[new] do
+  resources :games, only: %i[index] do
     collection do
-      get "result/:game_id", to: "games#result", as: "result"
-    end
-
-    resources :questions, only: [ :show ], param: :number do
-      collection do
-        post "answer"
-        get "result/:number", to: "questions#result", as: "result"
-      end
+      get :search, as: 'search'
+      get :result, as: 'result'
     end
   end
+  get "games/reset_session", to: "games#reset_game_session"
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback" 
   get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
