@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_18_232418) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_22_224753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "authentications", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -39,6 +40,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_232418) do
     t.datetime "updated_at", null: false
     t.string "category"
     t.integer "image_id"
+    t.text "caption"
+    t.jsonb "embedding"
   end
 
   create_table "questions", force: :cascade do |t|

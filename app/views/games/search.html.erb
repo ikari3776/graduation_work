@@ -1,0 +1,51 @@
+<% content_for(:title, '検索結果') %>
+<div class="container mt-2">
+  <h2 class="text-center mb-2">
+    検索結果<i class="bi bi-search"></i> 
+  </h2>
+
+  <h3>第<%= @current_round %>/5問</h3>
+
+  <div class="d-flex justify-content-center mb-2">
+    <%= image_tag @random_image.url, alt: "ゲーム画像", class: "img-fluid", style: "max-height: 30vh; object-fit: contain;" %>
+  </div>
+
+  <div class="card p-4 shadow-sm">
+    <p class="fs-5"><strong>検索ワード:</strong> <span class="badge bg-secondary"><%= @query_text %></span></p>
+      <% if @position.nil? %>
+        <p>検索結果:101位以下</p>
+        <p><strong>得点:</strong> 0点</p>
+      <% elsif @position == 1 %>
+        <p>検索結果:<%= @position %>番目にヒットしました！</p>
+        <h2 class="text-danger text-center"><strong>FIRST HIT!!!</strong></h2>
+        <p><strong>得点:</strong> <%= @score %>点</p>
+      <% elsif @position <= 100 %>
+        <p>検索結果:<%= @position %>番目にヒットしました！</p>
+        <p><strong>得点:</strong> <%= @score %>点</p>
+      <% else %>
+        <p>検索結果:101位以下</p>
+        <p><strong>得点:</strong> 0点</p>
+      <% end %>
+  </div>
+
+  <% if session[:game_round] > 5 %>
+    <%= link_to "結果を見る", result_games_path(round: @current_round), class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "次の問題へ", games_path, class: "btn btn-secondary" %>
+  <% end %>
+
+  <% if @similar_images.any? %>
+    <h3 class="text-center mb-3">上位10位の画像</h3>
+    <div class="row">
+      <% @similar_images.each do |image| %>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card">
+            <%= image_tag image[:image].url, alt: "ゲーム画像", class: "card-img-top" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>  
+    <h3 class="text-center mb-3">検索結果なし</h3>
+  <% end %>
+</div>
