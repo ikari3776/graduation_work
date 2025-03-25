@@ -3,6 +3,10 @@ require_relative "boot"
 require "rails/all"
 
 require 'dotenv/load' if %w[development test].include?(ENV['RAILS_ENV'] || Rails.env)
+
+require 'pgvector'
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.include(PGVector::Rails::Adapter)
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
