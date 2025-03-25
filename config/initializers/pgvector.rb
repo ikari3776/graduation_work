@@ -1,3 +1,1 @@
-require 'pgvector'
-
-Pgvector::ActiveRecord.extend
+require 'pgvector/rails'
