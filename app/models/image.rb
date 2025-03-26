@@ -1,6 +1,6 @@
 class Image < ApplicationRecord
     scope :with_embeddings, -> { where.not(embedding: nil) }
-    has_vector :embedding, dimensions: 1536  
+
     def self.find_similar_images(query_embedding, limit: 10)
       # query_embedding が String なら変換（DB のデータは JSON 型なので、基本 Array のはず）
       query_embedding = JSON.parse(query_embedding) if query_embedding.is_a?(String)
@@ -22,5 +22,13 @@ class Image < ApplicationRecord
       return 0 if magnitude1.zero? || magnitude2.zero?
   
       dot_product / (magnitude1 * magnitude2)
+    end
+
+    def embedding
+      if attributes["embedding"].is_a?(String)
+        attributes["embedding"].gsub(/[\[\]]/, "").split(",").map(&:to_f)
+      else
+        attributes["embedding"]
+      end
     end
 end  
