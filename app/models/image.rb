@@ -1,9 +1,6 @@
 class Image < ApplicationRecord
     scope :with_embeddings, -> { where.not(embedding: nil) }
-  
-    # 余計な serialize を削除！（embedding は JSON 型なので不要）
-    # serialize :embedding, JSON  ← これを削除！
-  
+    has_vector :embedding, dimensions: 1536  
     def self.find_similar_images(query_embedding, limit: 10)
       # query_embedding が String なら変換（DB のデータは JSON 型なので、基本 Array のはず）
       query_embedding = JSON.parse(query_embedding) if query_embedding.is_a?(String)
