@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   end
 
   def search
-    @random_image = Image.find_by(id: params[:image_id]) # フォームから送られてきた画像IDを取得
+    @random_image = Image.find_by(id: params[:image_id])
 
     if @random_image.nil?
       flash[:alert] = "画像が見つかりませんでした"
@@ -23,10 +23,11 @@ class GamesController < ApplicationController
 
     if params[:query].present?
       @query_text = params[:query]
-      @query_embedding = EmbeddingGenerator.generate_embedding(@query_text) # 検索ワードの埋め込みを生成
-      @similar_images = Image.find_similar_images(@query_embedding, limit: 10)
+      @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
+      @all_ranked_images = Image.rank_all_images(@query_embedding)
+      @similar_images = @all_ranked_images.first(10)
 
-      @position = @similar_images.index { |h| h[:image].id == @random_image.id }&.+(1)
+      @position = @all_ranked_images.index { |h| h[:image].id == @random_image.id }&.+(1)
       @score = calculate_score(@position)
 
       session[:total_score] += @score
@@ -36,7 +37,7 @@ class GamesController < ApplicationController
 
       render :search
     else
-      flash[:alert] = "検索ワードを入力してください"
+      flash[:danger] = "検索ワードを入力してください"
       redirect_to games_path
     end
   end

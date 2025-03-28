@@ -1,18 +1,17 @@
 class Image < ApplicationRecord
     scope :with_embeddings, -> { where.not(embedding: nil) }
 
-    def self.find_similar_images(query_embedding, limit: 10)
-      # query_embedding が String なら変換（DB のデータは JSON 型なので、基本 Array のはず）
+    def self.rank_all_images(query_embedding)
       query_embedding = JSON.parse(query_embedding) if query_embedding.is_a?(String)
   
-      images = Image.with_embeddings.limit(100) # 100件の画像を対象
+      images = Image.with_embeddings
       scores = images.map do |image|
-        embedding = image.embedding # ここで JSON をパースしない！（すでに Array のはず）
+        embedding = image.embedding
         similarity = cosine_similarity(query_embedding, embedding)
         { image: image, similarity: similarity }
       end
   
-      scores.sort_by { |h| -h[:similarity] }.first(limit) # 類似度が高い順にソートし、制限を適用
+      scores.sort_by { |h| -h[:similarity] }
     end
   
     def self.cosine_similarity(vec1, vec2)
