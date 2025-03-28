@@ -3,9 +3,9 @@ require 'httparty'
 class UnsplashService
   BASE_URL = 'https://api.unsplash.com/photos/random'
   PER_PAGE = 30
-  MAX_IMAGES = 10000
+  MAX_IMAGES = 100
 
-  def self.fetch_and_save_images(total_images = 1000)
+  def self.fetch_and_save_images(total_images = 100)
     batches = (total_images / PER_PAGE.to_f).ceil
 
     batches.times do |i|
@@ -16,7 +16,7 @@ class UnsplashService
         images = JSON.parse(response.body)
         existing_urls = Image.where(url: images.map { |img| img['urls']['regular'] }).pluck(:url).to_set
         images.each do |img|
-          Image.create!(url: img['urls']['regular'])
+          image_url = img['urls']['regular']
           unless existing_urls.include?(image_url)
             Image.create!(url: image_url)
             puts "保存: #{image_url}"
