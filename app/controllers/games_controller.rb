@@ -59,7 +59,11 @@ class GamesController < ApplicationController
 
   def calculate_score(position)
     return 500 if position == 1
-    return (100 - position) if position && position <= 100
-    return 0
+    return 0 if position > 100
+  
+    base_score = 200 - position
+    bonus = 300 / position
+  
+    base_score + bonus
   end
 end

@@ -34,11 +34,13 @@
       <% end %>
   </div>
 
-  <% if session[:game_round] > 5 %>
-    <%= link_to "結果を見る", result_games_path(round: @current_round), class: "btn btn-primary" %>
-  <% else %>
-    <%= link_to "次の問題へ", games_path, class: "btn btn-secondary" %>
-  <% end %>
+  <div class="text-center">
+    <% if session[:game_round] > 5 %>
+      <%= link_to "結果を見る", result_games_path(round: @current_round), class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "次の問題へ", games_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
 
   <% if @similar_images.any? %>
     <h3 class="text-center mb-3">上位10位の画像</h3>
@@ -47,6 +49,8 @@
         <div class="col-md-3 col-sm-6 mb-3">
           <div class="card">
             <%= image_tag image[:image].url, alt: "ゲーム画像", class: "card-img-top" %>
+            <%= image[:image].url %>
+            <%= image[:image].id %>
           </div>
         </div>
       <% end %>
