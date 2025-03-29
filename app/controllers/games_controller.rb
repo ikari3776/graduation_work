@@ -45,6 +45,14 @@ class GamesController < ApplicationController
   def result
     @total_score = session[:total_score]
 
+    if logged_in?
+      Game.create!(
+        user_id: current_user.id,
+        total_score: @total_score,
+        finished_at: Time.current
+      )
+    end
+
     session.delete(:game_round)
     session.delete(:total_score)
     session.delete(:game_images)
