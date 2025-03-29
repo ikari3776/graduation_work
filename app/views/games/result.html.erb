@@ -1,4 +1,8 @@
-<h2>ゲーム終了！お疲れさまでした！</h2>
-<p>合計得点: <strong><%= @total_score %>点</strong> です！</p>
+<% content_for(:title, 'ゲーム結果') %>
+<div class="text-center">
+  <h2>ゲーム終了！お疲れさまでした！</h2>
+  <p>合計得点: <strong><%= @total_score %>点</strong> !</p>
 
-<%= link_to "🔄 もう一度プレイする", games_path %>
+  <%= link_to "もう一度プレイする", games_path, class: "btn btn-primary" %>
+  <%= link_to "ホームに戻る", root_path, class: "btn btn-secondary" %>
+</div>

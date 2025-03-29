@@ -4,26 +4,32 @@
     検索結果<i class="bi bi-search"></i> 
   </h2>
 
-  <h3>第<%= @current_round %>/5問</h3>
+  <h3 class="text-center">
+    第<%= @current_round %>/5問
+  </h3>
 
   <div class="d-flex justify-content-center mb-2">
     <%= image_tag @random_image.url, alt: "ゲーム画像", class: "img-fluid", style: "max-height: 30vh; object-fit: contain;" %>
   </div>
 
-  <div class="card p-4 shadow-sm">
+  <p class="text-center text-muted mt-1">
+    画像提供：<a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>
+  </p>
+
+  <div class="card p-2 shadow-sm">
     <p class="fs-5"><strong>検索ワード:</strong> <span class="badge bg-secondary"><%= @query_text %></span></p>
       <% if @position.nil? %>
-        <p>検索結果:101位以下</p>
+        <p><strong>検索結果:</strong> 101位以下</p>
         <p><strong>得点:</strong> 0点</p>
       <% elsif @position == 1 %>
-        <p>検索結果:<%= @position %>番目にヒットしました！</p>
+        <p><strong>検索結果:</strong> <%= @position %>番目にヒットしました！</p>
         <h2 class="text-danger text-center"><strong>FIRST HIT!!!</strong></h2>
         <p><strong>得点:</strong> <%= @score %>点</p>
       <% elsif @position <= 100 %>
-        <p>検索結果:<%= @position %>番目にヒットしました！</p>
+        <p><strong>検索結果:</strong> <%= @position %>番目にヒットしました！</p>
         <p><strong>得点:</strong> <%= @score %>点</p>
       <% else %>
-        <p>検索結果:101位以下</p>
+        <p><strong>検索結果:</strong> 101位以下</p>
         <p><strong>得点:</strong> 0点</p>
       <% end %>
   </div>
