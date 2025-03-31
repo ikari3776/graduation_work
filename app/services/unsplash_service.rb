@@ -3,7 +3,7 @@ require 'httparty'
 class UnsplashService
   BASE_URL = 'https://api.unsplash.com/search/photos'
   PER_PAGE = 30
-  QUERIES = ['business', 'sports', 'vehicles']
+  QUERIES = ['vehicles']
 
 
   def self.extract_photo_id(url)
@@ -17,8 +17,8 @@ class UnsplashService
     QUERIES.each do |query|
       total_saved = 0
 
-      (1..50).each do |page|
-        break if total_saved >= 900
+      (1..40).each do |page|
+        break if total_saved >= 1200
 
         url = "#{BASE_URL}?query=#{query}&per_page=#{PER_PAGE}&page=#{page}&content_filter=high&client_id=#{ENV['UNSPLASH_ACCESS_KEY']}"
         response = HTTParty.get(url)
@@ -46,7 +46,7 @@ class UnsplashService
         sleep(1)
       end
 
-      puts "#{query} の画像取得完了（合計: #{total_saved}/900）"
+      puts "#{query} の画像取得完了（合計: #{total_saved}/1200）"
     end
 
     puts "すべてのカテゴリの画像を取得しました！"
