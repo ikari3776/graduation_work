@@ -5,4 +5,14 @@
 
   <%= link_to "もう一度プレイする", games_path, class: "btn btn-primary" %>
   <%= link_to "ホームに戻る", root_path, class: "btn btn-secondary" %>
+  
+  <% tweet_text = "画像検索ゲーム「FIRST HIT」で#{@total_score} 点獲得したよ！ みんなも挑戦しよう！" %>
+  <% tweet_url = "https://first-hit.com" %> 
+  <% hashtags = "FIRSTHIT,画像検索ゲーム" %>
+
+  <a href="https://twitter.com/intent/tweet?text=<%= CGI.escape(tweet_text) %>&url=<%= CGI.escape(tweet_url) %>&hashtags=<%= CGI.escape(hashtags) %>" 
+    target="_blank" 
+    rel="noopener noreferrer">
+    <button>Xで共有</button>
+  </a>
 </div>

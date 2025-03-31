@@ -17,10 +17,11 @@ class GamesController < ApplicationController
     @random_image = Image.find_by(id: params[:image_id])
 
     if @random_image.nil?
-      flash[:alert] = "画像が見つかりませんでした"
+      reset_game_session
+      flash[:alert] = "エラーが発生しました"
       redirect_to root_path and return
     end
-
+    
     if params[:query].present?
       @query_text = params[:query]
       @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
