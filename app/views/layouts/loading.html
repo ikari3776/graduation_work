@@ -1,0 +1,79 @@
+<style>
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #1082ce;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.5s linear;
+}
+
+.loading.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-text {
+  color: #FFF;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.spinner {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px solid #FFF;
+  border-left-color: #1082ce; 
+  animation: spinner-rotation 1s linear infinite;
+}
+
+@keyframes spinner-rotation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-text {
+  color:#94e3e4;
+}
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("search-form");
+    const loading = document.getElementById("loading");
+
+    if (form && loading) {
+      form.addEventListener("submit", () => {
+        loading.classList.remove("loaded");
+      });
+    }
+
+    window.addEventListener("load", () => {
+      loading.classList.add("loaded");
+    });
+  });
+</script>
+<div class="loading" id="loading">
+  <p class="loading-text">検索中...</p>
+  <div class="spinner"></div>
+</div>
