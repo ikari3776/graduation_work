@@ -32,13 +32,21 @@
       </tr>
     </thead>
     <tbody>
-      <% @ranks.each_with_index do |rank, index| %>
+      <% prev_score = nil %>
+      <% rank = 0 %>
+      <% display_rank = 0 %>
+      <% @ranks.each do |user| %>
+        <% rank += 1 %>
+        <% if user.max_total_score != prev_score %>
+          <% display_rank = rank %>
+        <% end %>
         <tr>
-          <td class="fw-bold"><%= index + 1 %> 位</td>
-          <td><%= rank.name %> さん</td>
-          <td class="fw-bold text-primary"><%= rank.max_total_score %> 点</td>
-          <td><%= (rank.latest_finished_at || Time.parse('2099-01-01 00:00:00')).in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td class="fw-bold"><%= display_rank %> 位</td>
+          <td><%= user.name %> さん</td>
+          <td class="fw-bold text-primary"><%= user.max_total_score %> 点</td>
+          <td><%= (user.latest_finished_at || Time.parse('2099-01-01 00:00:00')).in_time_zone('Asia/Tokyo').strftime('%Y-%m-%d %H:%M:%S') %></td>
         </tr>
+        <% prev_score = user.max_total_score %>
       <% end %>
     </tbody>
   </table>
