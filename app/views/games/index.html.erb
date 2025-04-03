@@ -1,6 +1,9 @@
 <% content_for(:title, 'ゲーム') %>
 <div class="text-center">
-  <h3>第<%= session[:game_round] %>/5問</h3>
+  <div class="position-relative text-center mb-2">
+    <h3 class="mb-0">第<%= session[:game_round] %>/5問</h3>
+    <p class="position-absolute top-0 end-0 mb-0 me-4">現在の得点: <strong><%= @current_score %>点</strong></p>
+  </div>
 
   <%= image_tag @random_image.url, alt: "ゲーム画像", class: "img-fluid", style: "max-height: 65vh; object-fit: contain;" %>
 
