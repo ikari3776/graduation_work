@@ -5,6 +5,7 @@ class GamesController < ApplicationController
 
     session[:game_images] ||= Image.where.not(embedding: nil).order("RANDOM()").limit(5).pluck(:id)
 
+    @current_score = session[:total_score]
     @random_image = Image.find_by(id: session[:game_images][session[:game_round] - 1])
 
     if @random_image.nil?
