@@ -1,20 +1,34 @@
 <% content_for(:title, '遊び方') %>
-<div class="container mt-4">
-  <h1 class="text-center mb-4">
-    遊び方
-  </h1>
+<h1 class='text-center'>
+  遊び方
+</h1>
 
-  <div class="card p-4">
-    <h2>ゲームの目的</h2>
-    <p>このゲームは、表示された画像にぴったり合う検索ワードを考え、検索結果の1位を狙うゲームです。</p>
-  </div>
-
-  <div class="card p-4 mt-3">
-    <h2>ルール</h2>
-    <ul>
-      <li>1回のゲームで、合計5問出題されます。</li>
-      <li>入力した検索ワードの検索結果順位に応じて点数が決まります。</li>
-      <li>より高いスコアを目指してチャレンジしよう！</li>
-    </ul>
-  </div>
+<h4 class='mx-5'>1. ゲーム</h4>
+<p class='text-center mx-5'>画面左上の「メニュー」ボタンを押し、「プレイ」を押すとゲームが開始されます。</p>
+<ul class='mx-5'>
+  <li>1回のゲームにつき5問あります。</li>
+  <li>表示された画像にぴったり合う検索ワードを考え、入力します。</li>
+  <li>「検索」ボタンを押すと、検索が始まります。</li>
+</ul>
+<div class='text-center'>
+  <%= image_tag asset_path('rule_01.png'), alt: '遊び方説明1', size: '400x400' %>
 </div>
+<p class='text-center mx-5'>検索が完了すると、検索結果画面が表示されます。</p>
+<ul class='mx-5'>
+  <li>入力した検索ワードを確認することができます。</li>
+  <li>入力した検索ワードでの画像検索において、表示されている画像が検索結果の何番目にヒットしたかが表示されます。</li>
+  <li>検索結果の順位に応じて獲得した得点を確認することができます。</li>
+</ul>
+<div class='text-center'>
+  <%= image_tag asset_path('rule_02.png'), alt: '遊び方説明2', size: '400x400' %>
+</div>
+<p class='text-center mx-5'>「次の問題へ」ボタンを押すと次の問題に進みます。5問すべて終わると合計得点が表示されます。</p>
+
+<h4 class='mx-5 mt-5'>2. ランキング</h4>
+<p class='text-center mx-5'>画面左上の「メニュー」ボタンを押し、「ランキング」を押すとランキングが確認できます。</p>
+<p class='text-danger mx-5'>※ランキングに参加するにはユーザー登録、ログインを行う必要があります。</p>
+<ul class='mx-5'>
+  <li>現在の自分の最高得点と順位を確認することができます。</li>
+  <li>全世界の上位10位の記録が表示されます。</li>
+  <li>世界1位の座を目指せ!</li>
+</ul>
