@@ -12,8 +12,12 @@
     </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :name, "ユーザー名" %>
+    <%= f.label :name, "ユーザー名" %><span class="text-danger">*</span>
     <%= f.text_field :name, placeholder: '半角英数字のみ使用できます', class: "form-control", required: true, minlength: 3, maxlength: 20 %>
+    <small class="form-text text-muted">
+      ※ユーザー名は後から変更可能です。<br>
+      ※ランキングに掲載される場合、他のユーザーにも公開されます。
+    </small>  
   </div>
 
   <%= f.submit "保存する", class: "btn btn-primary mt-3" %>
