@@ -5,7 +5,7 @@ require 'net/http'
 require 'json'
 
 API_KEY = ENV['OPENAI_API_KEY']
-MAX_IMAGES = 100
+MAX_IMAGES = 1000
 TEMP_DIR = "tmp/images"
 
 FileUtils.mkdir_p(TEMP_DIR)
@@ -87,7 +87,7 @@ def process_images
     puts "画像削除完了: #{file_path}"
   end
 
-  puts "100枚分のキャプション生成 & 画像削除完了！"
+  puts "1000枚分のキャプション生成 & 画像削除完了！"
 end
 
 process_images

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_06_032223) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_09_050648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_06_032223) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", null: false
+    t.string "email"
     t.string "subject", null: false
     t.text "message", null: false
     t.datetime "created_at", null: false
@@ -39,7 +39,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_06_032223) do
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
@@ -51,37 +50,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_06_032223) do
     t.integer "image_id"
     t.text "caption"
     t.jsonb "embedding"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.bigint "game_id"
-    t.string "image_url"
-    t.string "search_word"
-    t.integer "rank"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "search_results"
-    t.integer "image_id"
-    t.integer "number"
-    t.index ["game_id"], name: "index_questions_on_game_id"
-  end
-
-  create_table "rate_limit_infos", force: :cascade do |t|
-    t.integer "limit"
-    t.integer "remaining"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_game_progresses", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "game_id", null: false
-    t.text "answered_questions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_user_game_progresses_on_game_id"
-    t.index ["user_id"], name: "index_user_game_progresses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,7 +69,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_06_032223) do
   end
 
   add_foreign_key "games", "users"
-  add_foreign_key "questions", "games"
-  add_foreign_key "user_game_progresses", "games"
-  add_foreign_key "user_game_progresses", "users"
 end
