@@ -61,7 +61,6 @@ class GamesController < ApplicationController
 
   def reset_game_session
     reset_session
-    head :ok
   end
 
   private
