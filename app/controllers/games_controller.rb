@@ -16,34 +16,32 @@ class GamesController < ApplicationController
   end
 
   def search
+    if params[:query].blank?
+      flash[:danger] = "検索ワードを入力してください"
+      redirect_to games_path and return
+    end
+  
     @random_image = Image.find_by(id: params[:image_id])
-
     if @random_image.nil?
       reset_game_session
       flash[:alert] = "エラーが発生しました"
       redirect_to root_path and return
     end
-    
-    if params[:query].present?
-      @query_text = params[:query]
-      @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
-      @all_ranked_images = Image.rank_all_images(@query_embedding)
-      @similar_images = @all_ranked_images.first(10)
-
-      @position = @all_ranked_images.index { |h| h[:image].id == @random_image.id }&.+(1)
-      @score = calculate_score(@position)
-
-      session[:total_score] += @score
-      @current_round = session[:game_round]
-
-      session[:game_round] += 1 if session[:game_round] <= 5
-
-      render :search
-    else
-      flash[:danger] = "検索ワードを入力してください"
-      redirect_to games_path
-    end
-  end
+  
+    @query_text = params[:query]
+    @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
+    @all_ranked_images = Image.rank_all_images(@query_embedding)
+    @similar_images = @all_ranked_images.first(10)
+  
+    @position = @all_ranked_images.index { |h| h[:image].id == @random_image.id }&.+(1)
+    @score = calculate_score(@position)
+  
+    session[:total_score] += @score
+    @current_round = session[:game_round]
+    session[:game_round] += 1 if session[:game_round] <= 5
+  
+    render :search
+  end  
 
   def result
     @total_score = session[:total_score]
