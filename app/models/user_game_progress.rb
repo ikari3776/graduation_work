@@ -1,2 +1,0 @@
-class UserGameProgress < ApplicationRecord
-end

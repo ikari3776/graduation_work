@@ -9,7 +9,8 @@ class GamesController < ApplicationController
     @random_image = Image.find_by(id: session[:game_images][session[:game_round] - 1])
 
     if @random_image.nil?
-      flash[:alert] = "画像が見つかりませんでした"
+      reset_game_session
+      flash[:alert] = "エラーが発生しました"
       redirect_to root_path and return
     end
   end
