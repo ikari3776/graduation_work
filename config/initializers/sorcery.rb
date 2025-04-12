@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [:reset_password, :external]
+Rails.application.config.sorcery.submodules = [ :reset_password, :external ]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -158,14 +158,15 @@ Rails.application.config.sorcery.configure do |config|
   # config.auth0.callback_url = "https://0.0.0.0:3000/oauth/callback?provider=auth0"
   # config.auth0.site = "https://example.auth0.com"
   #
-  #config.external_providers = [:google]
-  config.google.key = ENV['GOOGLE_CLIENT_ID']
-  config.google.secret = ENV['GOOGLE_CLIENT_SECRET']
-  config.google.callback_url = Settings.sorcery[:google_callback_url]
-  config.google.user_info_url = "https://www.googleapis.com/oauth2/v3/userinfo"
-  config.google.user_info_mapping = { email: "email" }
-  config.google.scope = "email profile openid"
-
+  # config.external_providers = [:google]
+  unless Rails.env.test?
+    config.google.key = ENV["GOOGLE_CLIENT_ID"]
+    config.google.secret = ENV["GOOGLE_CLIENT_SECRET"]
+    config.google.callback_url = Settings.sorcery[:google_callback_url]
+    config.google.user_info_url = "https://www.googleapis.com/oauth2/v3/userinfo"
+    config.google.user_info_mapping = { email: "email" }
+    config.google.scope = "email profile openid"
+  end
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters"

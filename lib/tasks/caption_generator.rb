@@ -1,10 +1,10 @@
-require 'open-uri'
-require 'fileutils'
-require 'base64'
-require 'net/http'
-require 'json'
+require "open-uri"
+require "fileutils"
+require "base64"
+require "net/http"
+require "json"
 
-API_KEY = ENV['OPENAI_API_KEY']
+API_KEY = ENV["OPENAI_API_KEY"]
 MAX_IMAGES = 1000
 TEMP_DIR = "tmp/images"
 
@@ -26,21 +26,21 @@ end
 def generate_caption(file_path)
   image_data = encode_image_to_base64(file_path)
 
-  uri = URI('https://api.openai.com/v1/chat/completions')
+  uri = URI("https://api.openai.com/v1/chat/completions")
   request = Net::HTTP::Post.new(uri)
-  request['Content-Type'] = 'application/json'
-  request['Authorization'] = "Bearer #{API_KEY}"
+  request["Content-Type"] = "application/json"
+  request["Authorization"] = "Bearer #{API_KEY}"
 
   request.body = {
-    model: 'gpt-4o',
+    model: "gpt-4o",
     messages: [
-      { role: 'system', content: 'あなたは画像の内容を日本語で簡潔に説明するAIです。100トークン以内で、重要な情報のみを要約してください。' },
+      { role: "system", content: "あなたは画像の内容を日本語で簡潔に説明するAIです。100トークン以内で、重要な情報のみを要約してください。" },
       {
-        role: 'user',
+        role: "user",
         content: [
           "この画像の内容を100トークン以内で簡潔に説明してください。",
           {
-            type: 'image_url',
+            type: "image_url",
             image_url: {
               url: "data:image/jpeg;base64,#{image_data}"
             }
@@ -56,13 +56,13 @@ def generate_caption(file_path)
     http.request(request)
   end
 
-  if response.code == '200'
+  if response.code == "200"
     result = JSON.parse(response.body)
-    caption = result['choices'][0]['message']['content']
-    return caption.strip
+    caption = result["choices"][0]["message"]["content"]
+    caption.strip
   else
     puts "キャプション生成エラー: #{response.body}"
-    return nil
+    nil
   end
 end
 
@@ -91,4 +91,3 @@ def process_images
 end
 
 process_images
-
