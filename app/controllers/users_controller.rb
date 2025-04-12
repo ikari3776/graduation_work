@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def create_name
     @user = User.find(session[:user_id])
-    
+
     if @user.update(name_params)
       reset_session
       auto_login(@user)

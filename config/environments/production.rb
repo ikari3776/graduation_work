@@ -78,7 +78,7 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'first-hit.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: "first-hit.com", protocol: "https" }
 
   config.action_mailer.perform_deliveries = true
 

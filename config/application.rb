@@ -2,7 +2,7 @@ require_relative "boot"
 
 require "rails/all"
 
-require 'dotenv/load' if %w[development test].include?(ENV['RAILS_ENV'] || Rails.env)
+require "dotenv/load" if %w[development test].include?(ENV["RAILS_ENV"] || Rails.env)
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -18,9 +18,9 @@ module Myapp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    config.autoload_paths << Rails.root.join('app/services')
+    config.autoload_paths << Rails.root.join("app/services")
 
-    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join("lib")
 
     # Configuration for the application, engines, and railties goes here.
     #

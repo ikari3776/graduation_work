@@ -6,13 +6,13 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     user_hash = sorcery_fetch_user_hash(provider)
-  
+
     if user_hash.nil?
       access_token = @access_token.token rescue nil
       user_info = fetch_google_user_info(access_token)
-  
+
       if user_info.present?
-        Rails.logger.info "user_info: #{user_info.inspect}" 
+        Rails.logger.info "user_info: #{user_info.inspect}"
         uid = user_info["sub"]
         email = user_info["email"]
       else
@@ -22,7 +22,7 @@ class OauthsController < ApplicationController
       user_info = user_hash[:user_info]
       uid = user_hash[:uid] || user_info["sub"]
     end
-  
+
     if (@auth = Authentication.find_by(provider: provider, uid: uid))
       @user = @auth.user
       auto_login(@user)
@@ -54,19 +54,19 @@ class OauthsController < ApplicationController
   def signup_and_login(provider, user_info)
     random_password = SecureRandom.hex(10)
     temp_name = "firsthit#{SecureRandom.hex(3)}"
-  
+
     @user = User.create!(
       email: user_info["email"],
       password: random_password,
       password_confirmation: random_password,
       name: temp_name
     )
-  
+
     @user.authentications.create!(
       provider: provider,
       uid: user_info["sub"]
     )
-  
+
     reset_session
     auto_login(@user)
   end
@@ -77,11 +77,11 @@ class OauthsController < ApplicationController
         "Authorization" => "Bearer #{access_token}"
       }
     })
-    
+
     if response.code == 200
-      return JSON.parse(response.body)
+      JSON.parse(response.body)
     else
-      return nil
+      nil
     end
   end
 end

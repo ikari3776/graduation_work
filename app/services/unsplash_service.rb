@@ -1,9 +1,9 @@
-require 'httparty'
+require "httparty"
 
 class UnsplashService
-  BASE_URL = 'https://api.unsplash.com/search/photos'
+  BASE_URL = "https://api.unsplash.com/search/photos"
   PER_PAGE = 30
-  QUERIES = ['sports']
+  QUERIES = [ "food" ]
 
 
   def self.extract_photo_id(url)
@@ -17,17 +17,17 @@ class UnsplashService
     QUERIES.each do |query|
       total_saved = 0
 
-      (31..32).each do |page|
+      (52..53).each do |page|
         break if total_saved >= 30
 
         url = "#{BASE_URL}?query=#{query}&per_page=#{PER_PAGE}&page=#{page}&content_filter=high&client_id=#{ENV['UNSPLASH_ACCESS_KEY']}"
         response = HTTParty.get(url)
 
         if response.success?
-          images = JSON.parse(response.body)['results']
+          images = JSON.parse(response.body)["results"]
 
           images.each do |img|
-            image_url = img['urls']['regular']
+            image_url = img["urls"]["regular"]
             photo_id = extract_photo_id(image_url)
 
             next if existing_photo_ids.include?(photo_id)
