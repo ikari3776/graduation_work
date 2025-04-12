@@ -3,8 +3,8 @@ require "httparty"
 class UnsplashService
   BASE_URL = "https://api.unsplash.com/search/photos"
   PER_PAGE = 30
-  QUERIES = [ "food" ]
 
+  QUERIES = [ "food" ]
 
   def self.extract_photo_id(url)
     match = url.match(/photo-[^?]+/)
