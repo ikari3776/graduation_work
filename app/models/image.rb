@@ -3,17 +3,13 @@ class Image < ApplicationRecord
 
     def self.rank_all_images(query_embedding)
       query_embedding = JSON.parse(query_embedding) if query_embedding.is_a?(String)
-
-      images = Image.with_embeddings
-      scores = images.map do |image|
-        embedding = image.embedding
-        similarity = cosine_similarity(query_embedding, embedding)
-        { image: image, similarity: similarity }
-      end
-
-      scores.sort_by { |h| -h[:similarity] }
+    
+      Image
+        .where.not(embedding_vector: nil)
+        .order(Arel.sql("embedding_vector <-> '[#{query_embedding.join(',')}]'"))
+        .map { |image| { image: image } }
     end
-
+    
     def self.cosine_similarity(vec1, vec2)
       dot_product = vec1.zip(vec2).map { |a, b| a * b }.sum
       magnitude1 = Math.sqrt(vec1.map { |a| a**2 }.sum)

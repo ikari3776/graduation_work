@@ -25,7 +25,7 @@ gem "redis"
 
 gem "ruby-openai"
 
-gem "pgvector", "~> 0.3.0"
+gem "pgvector", git: "https://github.com/pgvector/pgvector-ruby.git", branch: "master"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

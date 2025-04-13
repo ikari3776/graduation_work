@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_12_221250) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_12_222659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -42,15 +42,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_12_221250) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "category"
-    t.integer "image_id"
-    t.text "caption"
-    t.jsonb "embedding"
-  end
+# Could not dump table "images" because of following StandardError
+#   Unknown type 'vector' for column 'embedding_vector'
+
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
