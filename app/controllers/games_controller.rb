@@ -30,15 +30,12 @@ class GamesController < ApplicationController
 
     @query_text = params[:query]
     @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
-    query_vector_sql = @query_embedding.join(',')
-    @all_ranked_images = Image
-      .select("*, embedding_vector <-> '[#{query_vector_sql}]' AS distance")
-      .where.not(embedding_vector: nil)
-      .order(Arel.sql("distance"))
-  
-    @similar_images = @all_ranked_images.limit(10).map { |image| { image: image } }
-  
-    @position = @all_ranked_images.find_index { |img| img.id == @random_image.id }&.+(1)
+
+    @all_ranked_images = Image.rank_all_images(@query_embedding)
+    @similar_images = @all_ranked_images.map { |image| { image: image } }
+
+    ranked_ids = @all_ranked_images.pluck(:id)
+    @position = ranked_ids.index(@random_image.id)&.+(1)
     @score = calculate_score(@position)
 
     session[:total_score] += @score

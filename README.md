@@ -32,4 +32,4 @@
 
 Figma: https://www.figma.com/design/MjKIqnr2Ew5b7Wxq3Ij4gh/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=FgV82hne3m5tOgkA-1
 
-ER図: https://gyazo.com/38636c2b8299604fc78c5aae61429b41
+ER図: https://gyazo.com/6cae42d1b19df97e09183f93fa7aff4f
