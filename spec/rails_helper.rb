@@ -15,8 +15,8 @@ require 'capybara/rspec'
 Capybara.default_driver = :selenium_chrome_headless
 Capybara.javascript_driver = :selenium_chrome_headless
 
-Selenium::WebDriver::Chrome::Service.driver_path = "/usr/local/bin/chromedriver"
-Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
+# Selenium::WebDriver::Chrome::Service.driver_path = "/usr/local/bin/chromedriver"
+# Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
