@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     @query_embedding = EmbeddingGenerator.generate_embedding(@query_text)
 
     @all_ranked_images = Image.rank_all_images(@query_embedding)
-    @similar_images = @all_ranked_images.map { |image| { image: image } }
+    @similar_images = @all_ranked_images.first(10).map { |image| { image: image } }
 
     ranked_ids = @all_ranked_images.pluck(:id)
     @position = ranked_ids.index(@random_image.id)&.+(1)
@@ -68,8 +68,8 @@ class GamesController < ApplicationController
   private
 
   def calculate_score(position)
+    return 0 if position.nil?
     return 500 if position == 1
-    return 0 if position > 100
 
     base_score = 200 - position
     bonus = 300 / position
