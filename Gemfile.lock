@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pgvector/pgvector-ruby.git
-  revision: 4c89e07ab6397f2ccd91a72e8133c804935c4661
+  revision: 783a219e77a0bbd34bc93869d9da1159d23865f0
   branch: master
   specs:
     pgvector (0.3.2)
