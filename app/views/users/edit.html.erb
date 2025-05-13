@@ -1,7 +1,7 @@
-<% content_for(:title, 'ユーザー編集') %>
+<% content_for(:title, 'ユーザー情報') %>
 <div class="container mt-4">
   <h1 class="text-center mb-4">
-    ユーザー編集
+    ユーザー情報
   </h1>
   <%= form_with model: @user do |f| %>
   <% if @user.errors.any? %>
@@ -31,9 +31,18 @@
       <%= f.label :name, class: "form-label" %><span class="text-danger">*</span>
       <%= f.text_field :name, placeholder: '半角英数字のみ使用できます', class: "form-control" %>
       <small class="form-text text-muted">
-        ※ランキングに掲載される場合、他のユーザーにも公開されます。
+        ランキングに掲載される場合、他のユーザーにも公開されます。
       </small>     
     </div>
+    <p>お気に入り称号</p>
+    <% @badges.each do |badge| %>
+      <div class="form-check">
+        <%= f.radio_button :selected_badge_id, badge.id, class: 'form-check-input', id: "badge_#{badge.id}" %>
+        <%= label_tag "badge_#{badge.id}" do %>
+          <%= image_tag asset_path(badge.image), style: 'width: 50px; height: 50px;' %>
+        <% end %>
+      </div>
+    <% end %>
   <%= f.submit "更新", class: "btn btn-primary" %>
   <% end %>
 </div>

@@ -16,4 +16,30 @@ class User < ApplicationRecord
 
   has_many :games, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :user_badges
+  has_many :badges, through: :user_badges
+
+  def badges_check
+    score = Game.where(user_id: id).maximum(:total_score)
+    game_count = Game.where(user_id: id).count
+
+    self.badges = []
+
+    self.badges << Badge.find_by(name: "初めてログインする")
+
+    self.badges << Badge.find_by(name: "1000点以上獲得する") if score >= 1000
+    self.badges << Badge.find_by(name: "1500点以上獲得する") if score >= 1500
+    self.badges << Badge.find_by(name: "2000点以上獲得する") if score >= 2000
+    self.badges << Badge.find_by(name: "2500点獲得する") if score >= 2500
+
+    self.badges << Badge.find_by(name: "5回以上プレイする") if game_count >= 5
+    self.badges << Badge.find_by(name: "10回以上プレイする") if game_count >= 10
+    self.badges << Badge.find_by(name: "30回以上プレイする") if game_count >= 30
+    self.badges << Badge.find_by(name: "50回以上プレイする") if game_count >= 50
+    self.badges << Badge.find_by(name: "100回以上プレイする") if game_count >= 100
+    self.badges << Badge.find_by(name: "500回以上プレイする") if game_count >= 500
+    self.badges << Badge.find_by(name: "1000回以上プレイする") if game_count >= 1000
+
+    self.badges
+  end
 end

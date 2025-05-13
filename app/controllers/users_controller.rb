@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @badges = @user.badges
   end
 
   def update
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation, :email)
+    params.require(:user).permit(:name, :password, :password_confirmation, :email, :selected_badge_id)
   end
 
   def name_params
