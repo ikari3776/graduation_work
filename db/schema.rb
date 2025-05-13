@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_12_222659) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_13_085721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  # enable_extension "vector"
+  enable_extension "vector"
 
   create_table "authentications", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -22,6 +22,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_12_222659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "image", null: false
+    t.datetime "achieved_at"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -46,6 +52,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_12_222659) do
 #   Unknown type 'vector' for column 'embedding_vector'
 
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "crypted_password", null: false
@@ -57,10 +72,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_12_222659) do
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
+    t.integer "selected_badge_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
   add_foreign_key "games", "users"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
 end

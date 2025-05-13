@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
   resources :policy, only: %i[index]
   resources :terms, only: %i[index]
+  resources :badges, only: %i[index]
   resources :games, only: %i[index] do
     collection do
       get :search, as: "search"
