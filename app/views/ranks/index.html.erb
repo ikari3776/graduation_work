@@ -7,7 +7,16 @@
   <% if logged_in? %>
     <div class="alert alert-info text-center">
       <% if @user_rank %>
-        <h4><%= current_user.name %> さんの成績</h4>
+        <h4>
+          <%= current_user.name %>
+            <% if current_user.selected_badge_id.present? %>
+              <% badge = Badge.find_by(id: current_user.selected_badge_id) %>
+              <% if badge %>
+                <%= image_tag asset_path(badge.image), style: 'width: 25px; height: 25px; margin-left: 8px; vertical-align: middle;' %>
+              <% end %>
+            <% end %>
+          の成績
+        </h4>
         <p class="mb-0">
           <span class="badge bg-primary fs-5"><%= @user_rank + 1 %> 位</span>
           <span class="fs-5"><%= @user_score %> 点</span>
