@@ -10,7 +10,7 @@ class RanksController < ApplicationController
               .group("users.id")
               .order("max_total_score DESC")
               .limit(10)
-              .includes(:badges)  # これでバッジ関連も事前読み込み
+              .includes(:badges)
 
     if logged_in?
       @user_score = Game.where(user_id: current_user.id).maximum(:total_score)
