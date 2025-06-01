@@ -23,7 +23,7 @@ class User < ApplicationRecord
     score = Game.where(user_id: id).maximum(:total_score) || 0
     game_count = Game.where(user_id: id).count || 0
 
-    badge_names = ["初めてログインする"]
+    badge_names = [ "初めてログインする" ]
     badge_names << "1000点以上獲得する" if score >= 1000
     badge_names << "1500点以上獲得する" if score >= 1500
     badge_names << "2000点以上獲得する" if score >= 2000
