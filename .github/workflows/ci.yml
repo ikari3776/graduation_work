@@ -32,7 +32,11 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Install packages
@@ -51,12 +55,14 @@ jobs:
         run: bin/rails db:create db:schema:load
         env:
           RAILS_ENV: test
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
       - name: Run RSpec tests
+        run: bundle exec rspec
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bundle exec rspec
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DATABASE_URL: postgres://postgres:${{ secrets.DB_PASSWORD }}@localhost:5432/myapp_test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
