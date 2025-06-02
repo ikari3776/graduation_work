@@ -16,7 +16,7 @@ test:
   <<: *default
   database: myapp_test
   username: postgres
-  password: postgres
+  password: <%= ENV.fetch("DB_PASSWORD", "") %>
   host: localhost
 
 production:
