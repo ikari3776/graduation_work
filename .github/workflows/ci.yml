@@ -18,7 +18,7 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: Lint code
         run: bin/rubocop -f github
 
   rspec:
@@ -26,14 +26,15 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: ankane/pgvector
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myapp_test
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready"
+          --health-cmd="pg_isready -U postgres"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -51,23 +52,24 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Create database
-        run: bin/rails db:create db:schema:load
+      - name: Set up database
         env:
           RAILS_ENV: test
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/myapp_test
+        run: |
+          bin/rails db:create
+          bin/rails db:schema:load
 
-      - name: Run RSpec tests
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/myapp_test
         run: bundle exec rspec
-        env:
-          RAILS_ENV: test
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DATABASE_URL: postgres://postgres:${{ secrets.DB_PASSWORD }}@localhost:5432/myapp_test
 
-      - name: Keep screenshots from failed system tests
+      - name: Upload screenshots on failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
+          path: tmp/screenshots
           if-no-files-found: ignore
