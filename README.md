@@ -27,44 +27,56 @@
 # 機能紹介
 | ユーザー登録 |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/52acef0090901966120bf13e9384bbf4.gif)](https://gyazo.com/52acef0090901966120bf13e9384bbf4) |
-| <p align="left">左上の「メニュー」から「ユーザー登録」を選択し、ユーザー登録画面に移動します。『メールアドレス』『ユーザー名（半角英数字のみ）』『パスワード』『パスワード確認』を入力してユーザー登録を行います。<br>または、画面右下の「Gログイン」を押すことでGoogleアカウントを使ってログインすることも可能です。|
+| [![Image from Gyazo](https://i.gyazo.com/a19dd94b531a6361ad57ef79a20c7459.gif)](https://gyazo.com/a19dd94b531a6361ad57ef79a20c7459) |
+| <p align="left">左上の「メニュー」から「新規登録」を選択し、ユーザー登録画面に移動します。『メールアドレス』『ユーザー名（半角英数字のみ）』『パスワード』『パスワード確認』を入力してユーザー登録を行います。<br>または、画面右下の「Gログイン」を押すことでGoogleアカウントを使ってログインすることも可能です。|
 <br>  
 
 | ログイン |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/3d357834d7845134eafec50747d744f8.gif)](https://gyazo.com/3d357834d7845134eafec50747d744f8) |
-| <p align="left">ユーザー登録を行うと自動的にログインされます。右上の表示でログイン中であるかを確認することができます。<br>※ログイン中でない場合、「ランキング」には参加できませんのでご注意ください。</p> |
+| [![Image from Gyazo](https://i.gyazo.com/58f7769091f5450661ed0233fb13cd52.gif)](https://gyazo.com/58f7769091f5450661ed0233fb13cd52) |
+| <p align="left">新規登録を行うと自動的にログインされます。右上の表示でログイン中であるかを確認することができます。<br>※ログイン中でない場合、「ランキング」には参加できませんのでご注意ください。</p> |
 <br>
 
 | ゲーム開始 |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/02647300de94eee428ea56594066f413.gif)](https://gyazo.com/02647300de94eee428ea56594066f413) |
-| <p align="left">左上の「メニュー」から「プレイ」を選択するとゲームが始まります。第1問から第5問までの全5問あります。</p> |
+| [![Image from Gyazo](https://i.gyazo.com/d6a7ad116a6b19aaca96a6b0ff2503ab.gif)](https://gyazo.com/d6a7ad116a6b19aaca96a6b0ff2503ab) |
+| <p align="left">メニューバーから「プレイ」を選択するとゲームが始まります。第1問から第5問までの全5問あります。</p> |
 <br>
 
-| ゲームの進め方① |
+| ゲームの進め方➀ |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/0a8e59ea8664d75d756aedbb5ae5cab6.gif)](https://gyazo.com/0a8e59ea8664d75d756aedbb5ae5cab6) |
+| [![Image from Gyazo](https://i.gyazo.com/1f3d3c9352de9ef932808294640b1075.gif)](https://gyazo.com/1f3d3c9352de9ef932808294640b1075) |
 | <p align="left">表示されている画像に合う検索ワードを考え、入力します。入力が完了したら「検索」を押します。</p> |
 <br>
 
-| ゲームの進め方② |
+| ゲームの進め方➁ |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/ad2fedf11df23b54be41a44a9fdf3d09.gif)](https://gyazo.com/ad2fedf11df23b54be41a44a9fdf3d09) |
+| [![Image from Gyazo](https://i.gyazo.com/e01c4cda43279c040bfdc333c038680c.gif)](https://gyazo.com/e01c4cda43279c040bfdc333c038680c) |
 | <p align="left">検索結果が表示されます。先ほど表示された画像が何番目にヒットしたかを確認します。また、獲得した得点や検索結果上位10位の画像を確認することができます。<br>検索結果を確認したら次の問題へ進みます。</p> |
 <br>
 
 | ゲーム終了 |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/f1bd42858e1a143cba1b6effd7ab3d01.gif)](https://gyazo.com/f1bd42858e1a143cba1b6effd7ab3d01) |
+| [![Image from Gyazo](https://i.gyazo.com/6b69e6ccc614d0b6b177ca81dd01b222.gif)](https://gyazo.com/6b69e6ccc614d0b6b177ca81dd01b222) |
 | <p align="left">5問目まで終えたら、「結果を見る」を押し、結果を見ます。合計得点を確認することができます。<br>「Xに共有」を押すことで結果をシェアすることもできます。</p> |
 <br>
 
 | ランキング |
 | :---: | 
-| [![Image from Gyazo](https://i.gyazo.com/0f1fcba5e51276597cceab50f6b44b93.png)](https://gyazo.com/0f1fcba5e51276597cceab50f6b44b93) |
-| <p align="left">「メニュー」の「ランキング」から全世界のランキングを確認することができます。自分の最高得点、順位に加えて全世界の上位10位の結果を確認できます。<br>ランキング参加にはログインが必要です。</p> |
+| [![Image from Gyazo](https://i.gyazo.com/33eb10abcdca01c5f4aff18a7cb0ae36.gif)](https://gyazo.com/33eb10abcdca01c5f4aff18a7cb0ae36) |
+| <p align="left">メニューバーの「ランキング」から全世界のランキングを確認することができます。自分の最高得点、順位に加えて全世界の上位10位の結果を確認できます。<br>ランキング参加にはログインが必要です。</p> |
+<br>
+
+| 称号➀ |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/3ef4ff87ef61aefa51273a6651e74a16.gif)](https://gyazo.com/3ef4ff87ef61aefa51273a6651e74a16) |
+| <p align="left">メニューバーの「称号」から獲得した称号を確認することができます。<br>この機能を利用するにはログインが必要です。</p> |
+<br>
+
+| 称号➁ |
+| :---: | 
+| [![Image from Gyazo](https://i.gyazo.com/bd8f89cf7cf8764a4606b879912e0666.gif)](https://gyazo.com/bd8f89cf7cf8764a4606b879912e0666) |
+| <p align="left">メニューバーの「設定」から獲得した称号をユーザー名の横に付けることができます。<br>この機能を利用するにはログインが必要です。</p> |
 <br>
 
 画面遷移図-figma: https://www.figma.com/design/MjKIqnr2Ew5b7Wxq3Ij4gh/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=FgV82hne3m5tOgkA-1
